@@ -4,14 +4,12 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      -- Initialize the language server
-      local lspconfig = require("lspconfig")
-      
       -- Configure pyright
-      lspconfig.pyright.setup({})
+      vim.lsp.config.pyright = {}
+      vim.lsp.enable('pyright')
       
       -- Essential keymaps
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to definition" })
+      vim.keymap.set('n', '<C-c>d', vim.lsp.buf.definition, { desc = "Go to definition" })
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show documentation" })
       vim.keymap.set('n', '<C-c>a', vim.lsp.buf.code_action, { desc = "LSP actions" })
       vim.keymap.set('n', '<C-c>r', vim.lsp.buf.rename, { desc = "Rename symbol" })
